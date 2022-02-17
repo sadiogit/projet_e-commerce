@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reference de Mes commandes E-commerce Sadio-shop!{% endblock %}
+
+{% block content %}
+<h2> Ma Commandes  {{order.reference }} </h2>
+<a href="{{ path ('account_order') }}"> Retour </a>
+<hr/><strong></strong>
+<p>
+<strong>Votre commande est :</strong>
+    {% if order.state == 1 %}
+        paiement accepté
+        {% elseif  order.state == 2 %}
+        en cours de preparation
+        {% elseif  order.state == 3 %}
+        en cours de livraison
+    {% endif %}
+
+ <br/>
+<strong>Commande passée le:</strong>  {{order.createdAt|date('d/m/Y') }} <br/>
+<strong>Référence de ma command :</strong> <small>{{ order.reference }}</small><br/>
+<strong>Transporteur :</strong> {{ order.carriername }}
+</p>
+<strong>Details:</strong>
+
+<table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix Unitaire</th>
+                <th scope="col">Tatal</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                 {% for product in order.orderDetails %}
+ 
+                <tr>
+                    <td><span class="badge badge-info">{{ product.product }}</span></td>
+                    <td>{{ product.quantity}}</td>
+                    <td>{{ (product.price / 100) |number_format(2, ',', '.') }} €</td>
+                    <td>{{ (product.total / 100)|number_format(2, ',', '.') }} €</td>
+                    
+                </tr>
+          
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <strong>Total produits :</strong> {{ (order.getTotal / 100)|number_format(2, ',', '.') }} €<br/>
+            <strong>Prix de la Livraison :</strong> {{ (order.carrierPrice / 100)|number_format(2, ',', '.') }} €<br/>
+            <hr>
+            <strong>TOTAUX :</strong> {{ ((order.carrierPrice + order.getTotal) / 100 )|number_format(2, ',', '.') }} €<br/>
+        </div>
+
+{% endblock %}
+

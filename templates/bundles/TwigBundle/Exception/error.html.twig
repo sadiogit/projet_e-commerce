@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block title %}Page introuvable!- E-commerce Sadio-shop{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+        <h2>Page introuvable</h2>
+        <p>Désolé, la page que vous recherchez est introuvable</p>
+        <a href="{{path('home')}}" class="btn btn-info">Allez à l'accueil</a>
+    </div>
+
+{% endblock %}

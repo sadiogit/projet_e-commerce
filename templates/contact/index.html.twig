@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous Contacter! E-commerce Sadio-shop!{% endblock %}
+
+{% block content %}
+
+    <h2>N'hesitez pas à prendre contact avec nous à travers ce formulaire</h2>
+
+       {% for message in app.flashes('notice') %}
+                <div class="alert alert-info"> {{ message }}</div>
+        {% endfor %}
+        <div class="row">
+            <di class="col-md-8">{{ form(form) }} </di>
+            <div class="col-md-4">
+                <strong>E-commerce Sadio-shop</strong>
+                <hr>
+                06 78 76 69 05 <br/>
+                54 rue de la paix<br/>
+                contact@paix.fr<br/>
+            </div>
+        </div>
+{% endblock %}

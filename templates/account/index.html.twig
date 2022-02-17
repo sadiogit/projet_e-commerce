@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte! Sadio-shop{% endblock %}
+
+{% block content %}
+<h1> Mon compte </h1>
+
+
+    Bienvenue {{ app.user.firstname }}  sur votre site E-commerce Sadio-shop <br>
+    Vous êtes notre {{ app.user.id }}<em>ème</em> Utilisateur<br>
+
+    <hr>
+    {% if is_granted('ROLE_ADMIN') %}
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="account-item-admin">
+                 
+                    <img src="{{ asset('assets/img/browser.png')}}" alt="" height="45px"><br>
+                    <a href="/admin">Vous etes un Administrateur, vous pouvez accedez au backoffice à partir de ce lien!</a><br>
+         
+                
+                </div>
+            </div>
+        </div>
+        
+       <hr> 
+    {% endif %}
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="account-item">
+            <img src="{{ asset('assets/img/password.png')}}" alt="" height="45px">
+                 <a href="{{ path('account_password') }}">Modifier votre mot de passe</a><br>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="account-item">
+            <img src="{{ asset('assets/img/map.png')}}" alt="" height="45px">
+                 <a href="{{ path('account_address') }}">Gerer mes Adresse</a><br>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="account-item">
+                <img src="{{ asset('assets/img/shopping-cart_up.png')}}" alt="" height="45px">
+                 <a href="{{ path('account_order') }}">Mes Commandes<a><br>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

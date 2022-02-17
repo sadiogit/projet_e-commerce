@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresse E-commerce Sadio-shop!{% endblock %}
+
+{% block content %}
+<a href="{{ path('account_address_add') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+<h2> Mes Compte </h2>
+<p> Ici vous pouvez gerer vos addresse! </p>
+<a href="{{ path ('account') }}"> Retour </a>
+<hr>
+
+{% if app.user.addresses|length == 0 %}
+    <p class="text-center">
+        Vous n'avez pas encore ajouter vos adresses. Pour ajouter une, veuiller <a href="">cliquer ici</a>
+    </p>
+{% else %}
+    <div class="row">
+        {% for address in app.user.addresses %}
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ address.id }} </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ address.name }} </h6>
+                    <p class="card-text">
+                        {{ address.address }}/{{ address.postal }} <br>
+                        {{ address.city }} -{{ address.country }}   
+                    </p>
+                    <a href="{{path('account_address_edit', {'id': address.id } ) }}" class="card-link">Modifier</a>
+                    <a href="{{ path('account_address_delete', {'id': address.id }) }}" class="card-link">Supprimer</a>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes E-commerce Sadio-shop!{% endblock %}
+
+{% block content %}
+<a href="{{ path('account_address_add') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+<h2> Mes Commandes </h2>
+<p> Ici vous pouvez gerer toutes vos commandes! </p>
+<a href="{{ path ('account') }}"> Retour </a>
+
+{% if orders|length == 0 %}
+    <p class="text-center">
+        Vous n'avez pas encore passeé de commande sur la Boutique Sadio-shop! Pour ajouter une, veuiller <a href="">cliquer ici</a>
+    </p>
+{% else %}
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Référence</th>
+                <th scope="col">Status</th>
+                <th scope="col">Passée</th>
+                <th scope="col">Produit(s)</th>
+                <th scope="col">Tatal</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                 {#% for order in app.user.orders|reverse %#}
+                 {% for order in orders %}
+                 {#% if order.isPaid == true %#}            
+                <tr>
+                   
+                    <td><span class="badge badge-info">{{ order.reference }}</span></td>
+                    <td>
+                        {% if order.state == 1 %}
+                            paiement accepté
+                            {% elseif  order.state == 2 %}
+                            en cours de preparation
+                            {% elseif  order.state == 3 %}
+                            en cours de livraison
+                        {% endif %}
+                    </td>
+                    <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                    <td class="text-center">{{ order.orderDetails|length }}</td>
+                    <td>{{ ((order.carrierPrice + order.getTotal) / 100 )|number_format(2, ',', '.') }} €</td>
+                    <td class="text-right"> <a href="{{ path('account_order_show', {'reference': order.reference}) }}"> detail de ma commandes </a></td>
+                    
+                </tr>
+                 {#% endif %#}      
+                {% endfor %}
+            </tbody>
+        </table>
+       
+   
+{% endif %}
+
+
+
+{% endblock %}
+

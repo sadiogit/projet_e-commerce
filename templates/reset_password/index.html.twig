@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié! Sadio-shop{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info"> {{ message }}</div>
+    {% endfor %}
+        <form method="post">
+            <h1 class="h3 mb-3 font-weight-normal"> Mot de passe oublié</h1>
+            <label for="inputEmail">Votre Email</label>
+            <input type="email" value="" name="email" id="inputEmail" class="form-control" placeholder="Merci d'entrer votre email" required autofocus>
+
+            <br>
+            <button class="btn btn-lg btn-info btn-block mt-3" type="submit"> Réinitialiser mon mot de pass </button>
+            <hr>
+            <p class="text-center"> Oû souhaiter-vous<a href="{{ path('app_login')}}"> vous conneter ?</a> </p>
+        </form>
+    </div>
+<br><br>
+{% endblock %}
+
